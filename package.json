@@ -1,40 +1,55 @@
 {
   "name": "committor",
   "displayName": "Committor",
-  "description": " AI-powered git commit writer using LLMs",
+  "publisher": "YOUR_PUBLISHER_NAME",
+  "description": "AI-powered git commit generator using LLMs (OpenAI, OpenRouter, Gemini).",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.107.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:committor.generateCommit"],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "committor.helloWorld",
-        "title": "Hello World"
+        "command": "committor.generateCommit",
+        "title": "Committor: Generate Commit Message"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Committor Settings",
+      "properties": {
+        "committor.openAIKey": {
+          "type": "string",
+          "description": "Your OpenAI API Key",
+          "default": ""
+        },
+        "committor.openRouterKey": {
+          "type": "string",
+          "description": "Your OpenRouter API Key",
+          "default": ""
+        },
+        "committor.geminiKey": {
+          "type": "string",
+          "description": "Your Gemini API Key",
+          "default": ""
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "@types/vscode": "^1.107.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "typescript-eslint": "^8.48.1",
-    "eslint": "^9.39.1",
-    "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "simple-git": "^3.30.0"
   }
 }

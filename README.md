@@ -1,26 +1,17 @@
 # Committor
 
-Committor is an AI-powered VS Code extension that generates meaningful git commit messages by analyzing your code changes.
+AI-powered VS Code extension to generate meaningful git commit messages using OpenAI, OpenRouter, and Gemini.
 
 ## Features
-
-- Generate commit messages automatically
-- Uses AI / LLMs to understand git diffs
+- Generates commit messages automatically
 - Supports multiple AI providers
-- Improves commit clarity and consistency
+- Users can save API keys in VS Code settings
 
 ## Usage
-
 1. Stage your git changes
 2. Run **Committor: Generate Commit Message**
-3. Review and commit
-
-## Requirements
-
-- Git repository
-- Node.js
-- API key for supported AI providers
+3. Select provider and enter API key (or use saved settings)
+4. Generated commit message is copied to clipboard
 
 ## License
-
 MIT
