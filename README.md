@@ -77,9 +77,10 @@ committor/
 │   ├── commit/           # Core logic for commit generation
 │   ├── config/           # Configuration management and key validation
 │   ├── const/            # System-wide constants (prompts, endpoints)
-│   ├── llm/              # Provider implementations (OpenAI, Gemini, OpenRouter)
+│   ├── llms/             # Provider implementations (OpenAI, Gemini, OpenRouter)
+│   ├── types/            # Centralized TypeScript interfaces
 │   ├── ui/               # VS Code UI wrappers (pickers and selectors)
-│   ├── utils/            # Shared utilities (Git helpers, message cleaners)
+│   ├── utils/            # Shared utilities (Git helpers, error handlers)
 │   └── extension.ts      # Main entry point and command registration
 ├── package.json          # Extension manifest and configuration schema
 └── tsconfig.json         # TypeScript configuration
@@ -97,14 +98,14 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 3. Configure your preferences:
    - **Default Provider**: Set your preferred AI.
    - **API Keys**: Manage keys for all providers.
-   - **Default Models**: Choose your go-to model for each provider.
+   - **Default Models**: Choose your go-to model (Supports **o1**, **Gemini 2.5**, **DeepSeek R1**, etc.).
 
 | Setting | Description |
 |---------|-------------|
 | `committor.defaultProvider` | Skip selection by setting a default AI. |
-| `committor.openaiModel` | Default model for OpenAI. |
-| `committor.openrouterModel` | Default model for OpenRouter. |
-| `committor.geminiModel` | Default model for Gemini. |
+| `committor.openaiModel` | Default model for OpenAI (e.g., `gpt-4o`, `o1`). |
+| `committor.openrouterModel` | Default model for OpenRouter (e.g., `deepseek-r1`). |
+| `committor.geminiModel` | Default model for Gemini (e.g., `gemini-2.0-flash`, `gemini-2.5-pro`). |
 
 ---
 
@@ -127,10 +128,10 @@ graph TD
     end
 
     subgraph "AI Engines"
-        LLM["llm/ providers"]
-        OpenAI["llm/openAI.ts"]
-        OpenRouter["llm/openRouter.ts"]
-        Gemini["llm/gemini.ts"]
+        LLM["llms/ providers"]
+        OpenAI["llms/openAI.ts"]
+        OpenRouter["llms/openRouter.ts"]
+        Gemini["llms/gemini.ts"]
     end
 
     subgraph "Storage & Config"
@@ -145,6 +146,8 @@ graph TD
     subgraph "Helpers"
         Git["utils/gitUtils.ts"]
         Extract["utils/extractCommitMessage.ts"]
+        Error["utils/errorHandler.ts"]
+        Types["types/index.ts"]
     end
 
     Ext --> Selector
@@ -152,12 +155,15 @@ graph TD
     Ext --> Config
     Generator --> Git
     Generator --> LLM
+    Generator --> Error
     LLM --> OpenAI
     LLM --> OpenRouter
     LLM --> Gemini
     LLM --> Endpoints
     LLM --> Prompts
     LLM --> Extract
+    Ext -.-> Types
+    Generator -.-> Types
 ```
 
 ---
@@ -166,6 +172,17 @@ graph TD
 
 ### OpenRouter "Data Policy" Error
 If using free models on OpenRouter, visit [OpenRouter Privacy Settings](https://openrouter.ai/settings/privacy) and enable **"Allow data usage for model improvement"**.
+
+---
+
+## 🗺️ Roadmap & Future Support
+
+We are constantly working to improve **Committor**. Upcoming features include:
+
+- **🚀 More LLM Providers**: Experimental support for **xAI Grok**, **Anthropic Claude**, and **Ollama** (for local models).
+- **📝 Multi-line Commits**: Support for generating detailed commit bodies and footers.
+- **🌐 Internationalization**: Localized commit messages for multiple languages.
+- **🛠️ Custom Templates**: Allow users to define their own commit message formats.
 
 ---
 

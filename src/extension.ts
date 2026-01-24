@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { generateCommit } from "./commit/commitGenerator";
 import { selectProvider, selectModel } from "./ui/selector";
 import { ensureApiKey } from "./config/configuration";
+import { getReadableError } from "./utils/errorHandler";
 
 export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand("committor.generate", async () => {
@@ -79,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
 				`✓ Commit message generated with ${apiProvider.label} (${selectedModel.label}) and populated in Source Control!`
 			);
 		} catch (err: any) {
-			const errorMessage = `Committor Error: ${err.message}`;
+			const errorMessage = getReadableError(err);
 
 			if (err.message.includes("data policy") || err.message.includes("Free model publication")) {
 				const action = "Configure Privacy Settings";

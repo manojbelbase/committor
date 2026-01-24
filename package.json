@@ -2,7 +2,7 @@
   "name": "committor",
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
-  "description": "Generate meaningful git commit messages instantly with OpenAI, Gemini, or OpenRouter.",
+  "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
   "version": "1.0.4",
   "icon": "icon.png",
   "repository": {
@@ -14,7 +14,8 @@
   },
   "categories": [
     "Machine Learning",
-    "SCM Providers"
+    "SCM Providers",
+    "Other"
   ],
   "keywords": [
     "git",
@@ -22,9 +23,21 @@
     "ai",
     "openai",
     "gemini",
-    "gpt",
     "openrouter",
-    "committor"
+    "conventional-commits",
+    "productivity",
+    "git-commit-msg",
+    "gpt-4o",
+    "deepseek-r1",
+    "AI Commit",
+    "AI Committer",
+    "AI Commit Generator",
+    "auto-commit",
+    "commit-assistant",
+    "grok",
+    "claude",
+    "llm",
+    "developer-tools"
   ],
   "main": "./out/extension.js",
   "activationEvents": [

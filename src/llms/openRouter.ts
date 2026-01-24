@@ -2,6 +2,7 @@ import axios from "axios";
 import { COMMIT_SYSTEM_PROMPT, getCommitUserPrompt } from "../const/prompts";
 import { extractCommitMessage } from "../utils/extractCommitMessage";
 import { OPENROUTER_API_URL } from "../const/endpoints";
+import { getReadableError } from "../utils/errorHandler";
 
 export async function generateCommitOpenRouter(diff: string, apiKey: string, model: string = "openai/gpt-oss-120b:free"): Promise<string> {
     try {
@@ -22,7 +23,7 @@ export async function generateCommitOpenRouter(diff: string, apiKey: string, mod
                 headers: {
                     "Authorization": `Bearer ${apiKey}`,
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "https://github.com/ManojBelbase/gitnova",
+                    "HTTP-Referer": "https://github.com/ManojBelbase/committor",
                     "X-Title": "Committor VS Code Extension"
                 }
             }
@@ -45,6 +46,6 @@ export async function generateCommitOpenRouter(diff: string, apiKey: string, mod
 
         return extractCommitMessage(content);
     } catch (error: any) {
-        throw new Error(`OpenRouter API error: ${error.response?.data?.error?.message || error.message}`);
+        throw new Error(getReadableError(error, "OpenRouter"));
     }
 }

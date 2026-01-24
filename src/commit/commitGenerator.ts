@@ -1,34 +1,33 @@
 import { getStagedChanges } from "../utils/gitUtils";
-import { generateCommitOpenAI } from "../llm/openAI";
-import { generateCommitOpenRouter } from "../llm/openRouter";
-import { generateCommitGemini } from "../llm/gemini";
+import { generateCommitOpenAI } from "../llms/openAI";
+import { generateCommitOpenRouter } from "../llms/openRouter";
+import { generateCommitGemini } from "../llms/gemini";
+import { LLMGenerator } from "../types";
 import * as vscode from "vscode";
+
+const PROVIDER_MAP: Record<string, LLMGenerator> = {
+    openai: generateCommitOpenAI,
+    openrouter: generateCommitOpenRouter,
+    gemini: generateCommitGemini,
+};
 
 export async function generateCommit(apiProvider: string, apiKey?: string, model?: string): Promise<string> {
     const diff = await getStagedChanges();
-
     const config = vscode.workspace.getConfiguration("committor");
+    const providerLower = apiProvider.toLowerCase();
 
-    if (!apiKey) {
-        apiKey = config.get<string>(`${apiProvider}Key`) || "";
-    }
+    const finalApiKey = apiKey || config.get<string>(`${providerLower}Key`);
+    const finalModel = model || config.get<string>(`${providerLower}Model`);
 
-    if (!model) {
-        model = config.get<string>(`${apiProvider}Model`) || undefined;
-    }
-
-    if (!apiKey) {
+    if (!finalApiKey) {
         throw new Error(`No API key found for ${apiProvider}. Please configure it in settings.`);
     }
 
-    switch (apiProvider.toLowerCase()) {
-        case "openrouter":
-            return generateCommitOpenRouter(diff, apiKey, model);
-        case "openai":
-            return generateCommitOpenAI(diff, apiKey, model);
-        case "gemini":
-            return generateCommitGemini(diff, apiKey, model);
-        default:
-            throw new Error("Unsupported API provider");
+    const generator = PROVIDER_MAP[providerLower];
+
+    if (!generator) {
+        throw new Error(`Unsupported API provider: ${apiProvider}`);
     }
+
+    return generator(diff, finalApiKey, finalModel);
 }

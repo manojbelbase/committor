@@ -1,5 +1,7 @@
-import simpleGit from "simple-git";
+import simpleGit, { SimpleGit } from "simple-git";
 import * as vscode from "vscode";
+
+let gitInstance: SimpleGit | undefined;
 
 export async function getStagedChanges(): Promise<string> {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
@@ -7,15 +9,19 @@ export async function getStagedChanges(): Promise<string> {
         throw new Error("No workspace folder found. Please open a folder first.");
     }
 
-    const git = simpleGit(workspaceFolder.uri.fsPath);
+    const workingDir = workspaceFolder.uri.fsPath;
+
+    if (!gitInstance) {
+        gitInstance = simpleGit(workingDir);
+    }
 
     try {
-        const isRepo = await git.checkIsRepo();
+        const isRepo = await gitInstance.checkIsRepo();
         if (!isRepo) {
             throw new Error("Not a git repository. Please initialize git first.");
         }
 
-        const diff = await git.diff(["--cached"]);
+        const diff = await gitInstance.diff(["--cached"]);
 
         if (!diff || diff.trim() === "") {
             throw new Error("No staged changes detected. Please stage your changes first using 'git add'.");

@@ -2,6 +2,7 @@ import axios from "axios";
 import { COMMIT_SYSTEM_PROMPT, getCommitUserPrompt } from "../const/prompts";
 import { extractCommitMessage } from "../utils/extractCommitMessage";
 import { getGeminiApiUrl, getGeminiModelsUrl } from "../const/endpoints";
+import { getReadableError } from "../utils/errorHandler";
 
 export async function generateCommitGemini(diff: string, apiKey: string, model: string = "gemini-1.5-flash"): Promise<string> {
     try {
@@ -26,7 +27,7 @@ export async function generateCommitGemini(diff: string, apiKey: string, model: 
         const rawContent = response.data.candidates[0].content.parts[0].text || "No response from Gemini";
         return extractCommitMessage(rawContent);
     } catch (error: any) {
-        let errorMessage = `Gemini API error: ${error.response?.data?.error?.message || error.message}`;
+        let errorMessage = getReadableError(error, "Gemini");
 
         if (error.response?.status === 404 || errorMessage.includes("not found") || errorMessage.includes("not supported")) {
             try {

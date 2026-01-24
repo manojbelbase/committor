@@ -1,14 +1,5 @@
 import * as vscode from "vscode";
-
-export interface AIProvider {
-    label: string;
-    value: string;
-}
-
-export interface AIModel {
-    label: string;
-    value: string;
-}
+import { AIProvider, AIModel } from "../types";
 
 const PROVIDERS: AIProvider[] = [
     { label: "OpenAI", value: "openai" },
@@ -24,6 +15,7 @@ const MODEL_OPTIONS: { [key: string]: AIModel[] } = {
         { label: "GPT-4 Turbo", value: "gpt-4-turbo" },
         { label: "o1 Preview", value: "o1-preview" },
         { label: "o1 Mini", value: "o1-mini" },
+        { label: "o1", value: "o1" },
         { label: "Custom Model...", value: "__custom__" }
     ],
     openrouter: [
@@ -39,6 +31,11 @@ const MODEL_OPTIONS: { [key: string]: AIModel[] } = {
     ],
     gemini: [
         { label: "Gemini 2.0 Flash", value: "gemini-2.0-flash" },
+        { label: "Gemini 2.0 Flash Lite", value: "gemini-2.0-flash-lite" },
+        { label: "Gemini 2.5 Flash", value: "gemini-2.5-flash" },
+        { label: "Gemini 2.5 Flash Lite", value: "gemini-2.5-flash-lite" },
+        { label: "Gemini 2.5 Pro", value: "gemini-2.5-pro" },
+        { label: "Gemini 3 Pro Preview", value: "gemini-3-pro-preview" },
         { label: "Custom Model...", value: "__custom__" }
     ]
 };

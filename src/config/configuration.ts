@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { AIProvider } from "../ui/selector";
+import { AIProvider } from "../types";
 
 export async function ensureApiKey(provider: AIProvider, selectedModel?: string): Promise<string | undefined> {
     const config = vscode.workspace.getConfiguration("committor");
