@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "Generate meaningful git commit messages instantly with OpenAI, Gemini, or OpenRouter.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icon": "icon.png",
   "repository": {
     "type": "git",
