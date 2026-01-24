@@ -1,17 +1,34 @@
 import axios from "axios";
+import { COMMIT_SYSTEM_PROMPT, getCommitUserPrompt } from "../const/prompts";
+import { extractCommitMessage } from "../utils/extractCommitMessage";
+import { OPENAI_API_URL } from "../const/endpoints";
 
-export async function generateCommitOpenAI(diff: string, apiKey: string): Promise<string> {
-    const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-            model: "gpt-4",
-            messages: [
-                { role: "system", content: "You are a git commit assistant." },
-                { role: "user", content: `Generate a concise commit message for these changes:\n${diff}` }
-            ]
-        },
-        { headers: { "Authorization": `Bearer ${apiKey}` } }
-    );
+export async function generateCommitOpenAI(diff: string, apiKey: string, model: string = "google/gemma-3n-e2b-it:free"): Promise<string> {
+    try {
+        const response = await axios.post(
+            OPENAI_API_URL,
+            {
+                model: model,
+                messages: [
+                    {
+                        role: "system",
+                        content: COMMIT_SYSTEM_PROMPT
+                    },
+                    { role: "user", content: getCommitUserPrompt(diff) }
+                ],
+                max_tokens: 500
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${apiKey}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
 
-    return response.data.choices[0].message.content;
+        const rawContent = response.data.choices[0].message.content || "No response from OpenAI";
+        return extractCommitMessage(rawContent);
+    } catch (error: any) {
+        throw new Error(`OpenAI API error: ${error.response?.data?.error?.message || error.message}`);
+    }
 }
