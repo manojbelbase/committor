@@ -4,6 +4,17 @@ All notable changes to the "committor" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.5] - 2026-01-25
+
+### Added
+- **MIT License**: Formally added the MIT license to the project.
+
+### Fixed
+- **Repository Optimization**: Optimized `.gitignore` and removed unnecessary tracked files to reduce package size.
+
+### Changed
+- Updated project version to 1.0.5 in `package.json`.
+
 ## [1.0.4] - 2026-01-24
 
 ### Added
