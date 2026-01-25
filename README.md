@@ -2,7 +2,7 @@
   <img src="icon.png" width="128" alt="Committor Logo">
 </p>
 
-# 🚀 Committor: AI that writes your Git commits
+# Committor: AI that writes your Git commits
 
 [![Marketplace](https://img.shields.io/visual-studio-marketplace/v/ManojBelbase.committor?label=Marketplace&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/ManojBelbase.committor?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
@@ -13,18 +13,18 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- **🤖 Multi-Provider Support**: Switch between OpenAI, Google Gemini, or OpenRouter with ease.
-- **🆓 Free-to-Use Models**: Optimized for free models like DeepSeek R1 and Gemini 2.0 Flash via OpenRouter.
-- **⚡ Auto-Population**: Automatically fills the Git Source Control input box for you.
-- **🔐 Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
-- **🎨 Conventional Commits**: Strictly adheres to the Conventional Commits standard (`feat:`, `fix:`, `chore:`, etc.).
-- **🛠️ Custom Models**: Manually input any model ID supported by your provider.
+- **Multi-Provider Support**: Switch between OpenAI, Google Gemini, or OpenRouter with ease.
+- **Free-to-Use Models**: Optimized for free models like DeepSeek R1 and Gemini 2.0 Flash via OpenRouter.
+- **Auto-Population**: Automatically fills the Git Source Control input box for you.
+- **Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
+- **Conventional Commits**: Strictly adheres to the Conventional Commits standard (`feat:`, `fix:`, `chore:`, etc.).
+- **Custom Models**: Manually input any model ID supported by your provider.
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 Using **Committor** is easy. Follow these steps to get started:
 
@@ -45,7 +45,7 @@ Using **Committor** is easy. Follow these steps to get started:
 
 ---
 
-## 🔄 How it Works (Flow)
+## How it Works (Flow)
 
 The following diagram illustrates the lifecycle of a commit message generation:
 
@@ -67,7 +67,7 @@ graph TD
 
 ---
 
-## 📂 Folder Structure
+## Folder Structure
 
 The project is organized logically to separate concerns:
 
@@ -88,7 +88,7 @@ committor/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 
@@ -109,7 +109,7 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 
 ---
 
-## 🏛️ Architecture Overview
+## Architecture Overview
 
 The following diagram precisely maps the project's internal dependencies:
 
@@ -168,25 +168,25 @@ graph TD
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
 ### OpenRouter "Data Policy" Error
 If using free models on OpenRouter, visit [OpenRouter Privacy Settings](https://openrouter.ai/settings/privacy) and enable **"Allow data usage for model improvement"**.
 
 ---
 
-## 🗺️ Roadmap & Future Support
+## Roadmap & Future Support
 
 We are constantly working to improve **Committor**. Upcoming features include:
 
-- **🚀 More LLM Providers**: Experimental support for **xAI Grok**, **Anthropic Claude**, and **Ollama** (for local models).
-- **📝 Multi-line Commits**: Support for generating detailed commit bodies and footers.
-- **🌐 Internationalization**: Localized commit messages for multiple languages.
-- **🛠️ Custom Templates**: Allow users to define their own commit message formats.
+- **More LLM Providers**: Experimental support for **xAI Grok**, **Anthropic Claude**, and **Ollama** (for local models).
+- **Multi-line Commits**: Support for generating detailed commit bodies and footers.
+- **Internationalization**: Localized commit messages for multiple languages.
+- **Custom Templates**: Allow users to define their own commit message formats.
 
 ---
 
-## 👨‍💻 Contributing
+## Contributing
 
 We welcome contributions!
 - **Repository**: [https://github.com/ManojBelbase/committor](https://github.com/ManojBelbase/committor)
