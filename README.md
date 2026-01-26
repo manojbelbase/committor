@@ -5,18 +5,19 @@
 # Committor: AI that writes your Git commits
 
 [![Marketplace](https://img.shields.io/visual-studio-marketplace/v/ManojBelbase.committor?label=Marketplace&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
+[![Open VSX](https://img.shields.io/open-vsx/v/manojbelbase/committor?label=Open%20VSX&style=flat-square)](https://open-vsx.org/extension/manojbelbase/committor)
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/ManojBelbase.committor?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
 
 **Committor** is a powerful VS Code extension that generates meaningful, conventional commit messages instantly from your staged changes using state-of-the-art AI models.
 
-[**Get it on the VS Code Marketplace**](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
+[**Get it on the VS Code Marketplace**](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor) | [**Get it on Open VSX**](https://open-vsx.org/extension/manojbelbase/committor)
 
 ---
 
 ## Features
 
 - **Multi-Provider Support**: Switch between OpenAI, Google Gemini, or OpenRouter with ease.
-- **Free-to-Use Models**: Optimized for free models like DeepSeek R1 and Gemini 2.0 Flash via OpenRouter.
+- **Free-to-Use Models**: Optimized for free models like Llama 3.3 70B and Gemini 2.0 Flash via OpenRouter.
 - **Auto-Population**: Automatically fills the Git Source Control input box for you.
 - **Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
 - **Conventional Commits**: Strictly adheres to the Conventional Commits standard (`feat:`, `fix:`, `chore:`, etc.).
@@ -28,20 +29,29 @@
 
 Using **Committor** is easy. Follow these steps to get started:
 
-### 1. Install from Marketplace
-1. Open **VS Code**.
-2. Go to the **Extensions** view (`Ctrl+Shift+X`).
-3. Search for **"Committor"**.
-4. Click **Install**.
+### 1. Install from Marketplace or Open VSX
+- **VS Code Marketplace**: Search for **"Committor"** in the Extensions view (`Ctrl+Shift+X`) and click **Install**.
+- **Open VSX**: Visit the [Committor page on Open VSX](https://open-vsx.org/extension/manojbelbase/committor) or search for it in compatible editors like **VSCodium** or **Google Antigravity**.
 
-### 2. Configure Your API Key
-1. **Stage your changes** first (`git add .`).
-2. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) to open the Command Palette.
-3. Type **"Committor: Generate Commit Message"** and press `Enter`.
-4. Select your **AI Provider** (e.g., *OpenRouter* for free models).
-5. Select your **Model** (e.g., *DeepSeek R1*).
-6. When prompted, **paste your API Key**.
-7. Select **"Yes"** when asked to save the key to settings for future use.
+### 2. Configure Your AI Provider
+Before generating your first commit, you need to provide an API key for your chosen AI provider.
+
+1. **Get an API Key**:
+   - **OpenRouter (Recommended)**: Go to [openrouter.ai](https://openrouter.ai/keys) to get a free key for models like DeepSeek R1.
+   - **Google Gemini**: Get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - **OpenAI**: Get a key from [OpenAI Dashboard](https://platform.openai.com/api-keys).
+
+2. **Setup in VS Code**:
+   - **Stage your changes** first (`git add .`).
+   - Press `Ctrl+Shift+P` and type **"Committor: Generate Commit Message"**.
+   - Select your **AI Provider** and **Model**.
+   - When prompted, **paste your API Key**.
+   - Select **"Yes"** to save it securely in your VS Code settings.
+
+### 3. (Optional) Fine-Tuning Settings
+You can customize how Committor behaves in the VS Code Settings (`Ctrl+,`):
+- **Copy to Clipboard**: By default, generated messages are copied to your clipboard. You can disable this by unchecking `committor.copyToClipboard`.
+- **Default Provider**: Set a default provider (e.g., `openrouter`) to skip the selection prompt every time.
 
 ---
 
@@ -100,12 +110,13 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
    - **API Keys**: Manage keys for all providers.
    - **Default Models**: Choose your go-to model (Supports **o1**, **Gemini 2.5**, **DeepSeek R1**, etc.).
 
-| Setting | Description |
-|---------|-------------|
-| `committor.defaultProvider` | Skip selection by setting a default AI. |
-| `committor.openaiModel` | Default model for OpenAI (e.g., `gpt-4o`, `o1`). |
-| `committor.openrouterModel` | Default model for OpenRouter (e.g., `deepseek-r1`). |
-| `committor.geminiModel` | Default model for Gemini (e.g., `gemini-2.0-flash`, `gemini-2.5-pro`). |
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `committor.defaultProvider` | Skip selection by setting a default AI. | `""` |
+| `committor.openaiModel` | Default model for OpenAI. | `"gpt-4"` |
+| `committor.openrouterModel` | Default model for OpenRouter. | `"meta-llama/llama-3.3-70b-instruct:free"` |
+| `committor.geminiModel` | Default model for Gemini. | `"gemini-1.5-flash"` |
+| `committor.copyToClipboard` | Automatically copy generated message to clipboard. | `true` |
 
 ---
 

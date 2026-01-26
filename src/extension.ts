@@ -9,19 +9,6 @@ export function activate(context: vscode.ExtensionContext) {
 		try {
 			const config = vscode.workspace.getConfiguration("committor");
 			let defaultProvider = config.get<string>("defaultProvider");
-
-			if (!defaultProvider) {
-				const keys = [
-					{ provider: "openrouter", key: config.get<string>("openrouterKey") },
-					{ provider: "openai", key: config.get<string>("openaiKey") },
-					{ provider: "gemini", key: config.get<string>("geminiKey") }
-				].filter(k => k.key && k.key.length > 0);
-
-				if (keys.length === 1) {
-					defaultProvider = keys[0].provider;
-				}
-			}
-
 			let apiProvider;
 			let selectedModel;
 			let apiKey;
@@ -47,11 +34,13 @@ export function activate(context: vscode.ExtensionContext) {
 				selectedModel = await selectModel(apiProvider);
 				if (!selectedModel) return;
 
-				apiKey = await ensureApiKey(apiProvider, selectedModel.value);
-				if (!apiKey) return;
+				const result = await ensureApiKey(apiProvider, selectedModel.value);
+				if (!result) return;
 
-				if (!defaultProvider) {
+				apiKey = result.key;
 
+				if (result.saved && !defaultProvider) {
+					await config.update("defaultProvider", apiProvider.value, vscode.ConfigurationTarget.Global);
 				}
 			}
 
@@ -75,7 +64,10 @@ export function activate(context: vscode.ExtensionContext) {
 			} catch (error) {
 			}
 
-			await vscode.env.clipboard.writeText(commitMessage);
+			if (config.get<boolean>("copyToClipboard")) {
+				await vscode.env.clipboard.writeText(commitMessage);
+			}
+
 			vscode.window.showInformationMessage(
 				`✓ Commit message generated with ${apiProvider.label} (${selectedModel.label}) and populated in Source Control!`
 			);

@@ -4,6 +4,12 @@ All notable changes to the "committor" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.6] - 2026-01-26
+
+### Changed
+- Aligned `package.json` model enums and `README.md` configuration details with current code implementation.
+- Updated project version to 1.0.6.
+
 ## [1.0.5] - 2026-01-25
 
 ### Added

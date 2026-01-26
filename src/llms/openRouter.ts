@@ -17,7 +17,7 @@ export async function generateCommitOpenRouter(diff: string, apiKey: string, mod
                     },
                     { role: "user", content: getCommitUserPrompt(diff) }
                 ],
-                max_tokens: 4000
+                max_tokens: 5000
             },
             {
                 headers: {

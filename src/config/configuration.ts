@@ -1,12 +1,15 @@
 import * as vscode from "vscode";
 import { AIProvider } from "../types";
 
-export async function ensureApiKey(provider: AIProvider, selectedModel?: string): Promise<string | undefined> {
+export async function ensureApiKey(provider: AIProvider, selectedModel?: string): Promise<{ key: string, saved: boolean } | undefined> {
     const config = vscode.workspace.getConfiguration("committor");
     let apiKey = config.get<string>(`${provider.value}Key`);
 
     if (apiKey) {
-        return apiKey;
+        if (selectedModel) {
+            await config.update(`${provider.value}Model`, selectedModel, vscode.ConfigurationTarget.Global);
+        }
+        return { key: apiKey, saved: true };
     }
 
     apiKey = await vscode.window.showInputBox({
@@ -23,7 +26,8 @@ export async function ensureApiKey(provider: AIProvider, selectedModel?: string)
         { placeHolder: `Save ${provider.label} API Key${selectedModel ? ' and selected model' : ''} for next time?` }
     );
 
-    if (saveOption?.label === "Yes") {
+    const saved = saveOption?.label === "Yes";
+    if (saved) {
         await config.update(`${provider.value}Key`, apiKey, vscode.ConfigurationTarget.Global);
         if (selectedModel) {
             await config.update(`${provider.value}Model`, selectedModel, vscode.ConfigurationTarget.Global);
@@ -31,5 +35,5 @@ export async function ensureApiKey(provider: AIProvider, selectedModel?: string)
         vscode.window.showInformationMessage(`${provider.label} settings saved!`);
     }
 
-    return apiKey;
+    return { key: apiKey, saved };
 }

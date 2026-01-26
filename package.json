@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "icon": "icon.png",
   "repository": {
     "type": "git",
@@ -80,7 +80,8 @@
             "gpt-4",
             "gpt-4-turbo",
             "o1-preview",
-            "o1-mini"
+            "o1-mini",
+            "o1"
           ]
         },
         "committor.openrouterKey": {
@@ -91,16 +92,13 @@
         "committor.openrouterModel": {
           "type": "string",
           "description": "Default OpenRouter model",
-          "default": "tngtech/deepseek-r1t2-chimera:free",
-          "enum": [
-            "deepseek/deepseek-r1:free",
-            "google/gemini-2.0-flash-exp:free",
-            "mistralai/mistral-small-24b-instruct-2501:free",
+           "default": "tngtech/deepseek-r1t2-chimera:free",
+            "enum": [
             "meta-llama/llama-3.3-70b-instruct:free",
-            "mistralai/mistral-7b-instruct:free",
-            "google/gemma-2-9b-it:free",
-            "microsoft/phi-3-medium-128k-instruct:free",
-            "openchat/openchat-7b:free"
+            "z-ai/glm-4.5-air:free",
+            "google/gemma-3-27b-it:free",
+            "tngtech/deepseek-r1t2-chimera:free",
+            "nvidia/nemotron-3-nano-30b-a3b:free"
           ]
         },
         "committor.geminiKey": {
@@ -111,15 +109,20 @@
         "committor.geminiModel": {
           "type": "string",
           "description": "Default Gemini model",
-          "default": "gemini-2.0-flash",
+          "default": "gemini-1.5-flash",
           "enum": [
+            "gemini-1.5-flash",
+            "gemini-1.5-flash-8b",
+            "gemini-1.5-pro",
             "gemini-2.0-flash",
             "gemini-2.0-flash-lite",
-            "gemini-2.5-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-2.5-pro",
-            "gemini-3-pro-preview"
+            "gemini-2.0-pro-exp-02-05"
           ]
+        },
+        "committor.copyToClipboard": {
+          "type": "boolean",
+          "description": "Automatically copy the generated commit message to the clipboard",
+          "default": true
         }
       }
     }
