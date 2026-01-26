@@ -4,7 +4,7 @@ import { extractCommitMessage } from "../utils/extractCommitMessage";
 import { getGeminiApiUrl, getGeminiModelsUrl } from "../const/endpoints";
 import { getReadableError } from "../utils/errorHandler";
 
-export async function generateCommitGemini(diff: string, apiKey: string, model: string = "gemini-1.5-flash"): Promise<string> {
+export async function generateCommitGemini(diff: string, apiKey: string, model: string = "gemini-2.0-flash"): Promise<string> {
     try {
         const response = await axios.post(
             getGeminiApiUrl(model, apiKey),

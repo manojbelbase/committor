@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Changed
 - Aligned `package.json` model enums and `README.md` configuration details with current code implementation.
 - Updated project version to 1.0.6.
+- 
 
 ## [1.0.5] - 2026-01-25
 

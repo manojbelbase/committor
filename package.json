@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "icon": "icon.png",
   "repository": {
     "type": "git",
