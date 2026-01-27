@@ -7,7 +7,7 @@ import { loadEnv } from "./utils/envLoader";
 
 export function activate(context: vscode.ExtensionContext) {
 	loadEnv();
-	const disposable = vscode.commands.registerCommand("committor.generate", async () => {
+	const disposable = vscode.commands.registerCommand("committor.generate", async (scm?: any) => {
 		try {
 			const config = vscode.workspace.getConfiguration("committor");
 			let defaultProvider = config.get<string>("defaultProvider");
@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let apiKey;
 
 			if (defaultProvider) {
-				const providerLabel = defaultProvider === "openai" ? "OpenAI" : (defaultProvider === "openrouter" ? "OpenRouter" : "Gemini");
+				const providerLabel = defaultProvider === "openai" ? "OpenAI" : (defaultProvider === "openrouter" ? "OpenRouter" : (defaultProvider === "groq" ? "Groq" : "Gemini"));
 				apiProvider = { label: providerLabel, value: defaultProvider };
 
 				const modelValue = config.get<string>(`${defaultProvider}Model`);
@@ -30,19 +30,33 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			if (!apiProvider) {
-				apiProvider = await selectProvider();
-				if (!apiProvider) return;
+				const openSettings = "Open Settings";
+				const selection = await vscode.window.showErrorMessage(
+					"API Key or Provider not configured. Please set them in settings or select a provider now.",
+					"Select Provider",
+					openSettings
+				);
 
-				selectedModel = await selectModel(apiProvider);
-				if (!selectedModel) return;
+				if (selection === openSettings) {
+					vscode.commands.executeCommand("workbench.action.openSettings", "committor");
+					return;
+				} else if (selection === "Select Provider") {
+					apiProvider = await selectProvider();
+					if (!apiProvider) return;
 
-				const result = await ensureApiKey(apiProvider, selectedModel.value);
-				if (!result) return;
+					selectedModel = await selectModel(apiProvider);
+					if (!selectedModel) return;
 
-				apiKey = result.key;
+					const result = await ensureApiKey(apiProvider, selectedModel.value);
+					if (!result) return;
 
-				if (result.saved && !defaultProvider) {
-					await config.update("defaultProvider", apiProvider.value, vscode.ConfigurationTarget.Global);
+					apiKey = result.key;
+
+					if (result.saved && !defaultProvider) {
+						await config.update("defaultProvider", apiProvider.value, vscode.ConfigurationTarget.Global);
+					}
+				} else {
+					return;
 				}
 			}
 
@@ -56,11 +70,15 @@ export function activate(context: vscode.ExtensionContext) {
 			);
 
 			try {
-				const gitExtension = vscode.extensions.getExtension('vscode.git');
-				if (gitExtension) {
-					const git = gitExtension.exports.getAPI(1);
-					if (git.repositories.length > 0) {
-						git.repositories[0].inputBox.value = commitMessage;
+				if (scm && scm.inputBox) {
+					scm.inputBox.value = commitMessage;
+				} else {
+					const gitExtension = vscode.extensions.getExtension('vscode.git');
+					if (gitExtension) {
+						const git = gitExtension.exports.getAPI(1);
+						if (git.repositories.length > 0) {
+							git.repositories[0].inputBox.value = commitMessage;
+						}
 					}
 				}
 			} catch (error) {

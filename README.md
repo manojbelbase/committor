@@ -16,43 +16,44 @@
 
 ## Features
 
-- **Multi-Provider Support**: Switch between OpenAI, Google Gemini, Groq, or OpenRouter with ease.
-- **State-of-the-Art Models**: Optimized for performance with models like GPT-4o, Gemini 2.0, and Groq's super-fast Llama 3 models.
 - **Auto-Population**: Automatically fills the Git Source Control input box for you.
-- **Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
+- **Quick Access**: Dedicated **"Generate Commit"** button with a ✨ (sparkle) icon in the Source Control title bar.
+- **Privacy First**: Your API keys never leave your machine.
 - **Conventional Commits**: Strictly adheres to the Conventional Commits standard (`feat:`, `fix:`, `chore:`, etc.).
 - **Custom Models**: Manually input any model ID supported by your provider.
 
 ---
 
-## Installation & Setup
+## Getting Started
 
-Using **Committor** is easy. Follow these steps to get started:
+Follow these simple steps to set up and start using **Committor**.
 
-### 1. Install from Marketplace or Open VSX
-- **VS Code Marketplace**: Search for **"Committor"** in the Extensions view (`Ctrl+Shift+X`) and click **Install**.
-- **Open VSX**: Visit the [Committor page on Open VSX](https://open-vsx.org/extension/manojbelbase/committor) or search for it in compatible editors like **VSCodium** or **Google Antigravity**.
+### 1. Installation (One-time Setup)
+- **VS Code Marketplace**: Search for **"Committor"** and click **Install**.
+- **Configure API Key**: 
+  - Stage your changes (`git add .`).
+  - Press `Ctrl+Shift+P` and type **"Committor: Generate Commit Message"**.
+  - Follow the prompts to select your provider (Groq, OpenRouter, Gemini, or OpenAI) and paste your API key.
+  - Select **"Yes"** to save it locally for later use without reentering it every time you generate a commit message.
 
-### 2. Configure Your AI Provider
-Before generating your first commit, you need to provide an API key for your chosen AI provider.
+### 2. How to Use
 
-1. **Get an API Key**:
-   - **Groq (Super Fast)**: Get an API key from [Groq Console](https://console.groq.com/keys).
-   - **OpenRouter (Recommended)**: Go to [openrouter.ai](https://openrouter.ai/keys) to get a free key for models like DeepSeek R1.
-   - **Google Gemini**: Get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-   - **OpenAI**: Get a key from [OpenAI Dashboard](https://platform.openai.com/api-keys).
+#### Option A: One-Click (Recommended)
+1. **Stage your changes** in the Source Control view.
+2. Click the ✨ (**sparkle icon**) or the **"Generate Commit"** text in the Source Control title bar.
+   - *Note: If this is your first time or if the API key is missing, a popup will guide you to select a provider and enter your key automatically.*
+3. The commit message will populate the input box!
 
-2. **Setup in VS Code**:
-   - **Stage your changes** first (`git add .`).
-   - Press `Ctrl+Shift+P` and type **"Committor: Generate Commit Message"**.
-   - Select your **AI Provider** and **Model**.
-   - When prompted, **paste your API Key**.
-   - Select **"Yes"** to save it securely in your VS Code settings.
+#### Option B: Command Palette
+1. **Stage your changes**.
+2. Press `Ctrl+Shift+P`.
+3. Type **"Committor: Generate Commit Message"** and hit Enter.
+   - *Note: If not configured, you will be prompted to set up your provider and API key.*
 
 ### 3. (Optional) Fine-Tuning Settings
-You can customize how Committor behaves in the VS Code Settings (`Ctrl+,`):
-- **Copy to Clipboard**: By default, generated messages are copied to your clipboard. You can disable this by unchecking `committor.copyToClipboard`.
-- **Default Provider**: Set a default provider (e.g., `openrouter`) to skip the selection prompt every time.
+Access settings via `Ctrl+,` and search for **"Committor"**:
+- **Default Provider**: Set a provider to skip the selection prompt.
+- **Copy to Clipboard**: Enabled by default for easy pasting elsewhere.
 
 ---
 
@@ -199,9 +200,11 @@ We are constantly working to improve **Committor**. Upcoming features include:
 
 ---
 
-## Contributing
+## Contributing & Feedback
 
-We welcome contributions!
+We welcome contributions and your feedback!
+- **Request a Model**: If there’s a specific model you’d like to see supported, please [open an issue](https://github.com/ManojBelbase/committor/issues) on GitHub.
+- **Contribute**: Feel free to submit pull requests for new features, bug fixes, or improved prompts.
 - **Repository**: [https://github.com/ManojBelbase/committor](https://github.com/ManojBelbase/committor)
 
 ---

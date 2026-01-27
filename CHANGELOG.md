@@ -3,6 +3,16 @@
 All notable changes to the "committor" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+ 
+## [1.0.9] - 2026-01-27
+
+### Added
+- **UI Enhancements**: Added a dedicated "Generate Commit" button to the Source Control title bar.
+- **Custom Visuals**: Replaced the standard sparkle icon with a vibrant, custom-designed gold/yellow sparkle SVG.
+- **Improved Visibility**: Command title updated to "Committor: Generate Commit Message" for better clarity in menus and search.
+
+### Changed
+- Updated project version to 1.0.9.
 
 ## [1.0.8] - 2026-01-27
 
@@ -35,10 +45,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.0.4] - 2026-01-24
 
 ### Added
-- **Gemini 2.0 Flash** and **DeepSeek R1** support.
-- **Conventional Commits** standardization for all AI providers.
-- **Improved AI Selection**: New UI prompt to choose between OpenAI, OpenRouter, and Gemini.
-- **Smart API Configuration**: Automatic detection and guiding for API key setup.
+- **Gemini 2.0 Flash** and- **Auto-Population**: Automatically fills the Git Source Control input box for you.
+- **Quick Access**: Dedicated **"Generate Commit"** button with a vibrant gold ✨ (sparkle) icon in the Source Control title bar.
+- **Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
+API key setup.
 - **New Branding**: High-resolution icon and updated documentation assets.
 
 ### Fixed

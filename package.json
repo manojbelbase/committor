@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "icon": "icon.png",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.84.0"
   },
   "categories": [
     "Machine Learning",
@@ -44,13 +44,30 @@
   "activationEvents": [
     "onCommand:committor.generate"
   ],
-  "contributes": {
+  "contributes": {  
     "commands": [
       {
         "command": "committor.generate",
-        "title": "Committor: Generate Commit Message"
+        "title": "Committor: Generate Commit Message",
+        "icon": "resources/sparkle.svg"
       }
     ],
+    "menus": {
+      "scm/input/title": [
+        {
+          "command": "committor.generate",
+          "group": "navigation",
+          "when": "scmProvider == git"
+        }
+      ],
+      "scm/title": [
+        {
+          "command": "committor.generate",
+          "group": "navigation",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
     "configuration": {
       "title": "Committor Settings",
       "properties": {

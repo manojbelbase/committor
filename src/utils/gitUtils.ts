@@ -21,15 +21,19 @@ export async function getStagedChanges(): Promise<string> {
             throw new Error("Not a git repository. Please initialize git first.");
         }
 
-        const diff = await gitInstance.diff(["--cached"]);
+        let diff = await gitInstance.diff(["--cached"]);
 
         if (!diff || diff.trim() === "") {
-            throw new Error("No staged changes detected. Please stage your changes first using 'git add'.");
+            diff = await gitInstance.diff();
+        }
+
+        if (!diff || diff.trim() === "") {
+            throw new Error("No changes detected. Please make some changes first.");
         }
 
         return diff;
     } catch (error: any) {
-        if (error.message.includes("Not a git repository") || error.message.includes("No staged changes")) {
+        if (error.message.includes("Not a git repository") || error.message.includes("No changes detected")) {
             throw error;
         }
         throw new Error(`Git error: ${error.message}`);
