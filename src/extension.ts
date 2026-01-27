@@ -7,32 +7,53 @@ import { loadEnv } from "./utils/envLoader";
 
 export function activate(context: vscode.ExtensionContext) {
 	loadEnv();
-	const disposable = vscode.commands.registerCommand("committor.generate", async (scm?: any) => {
+	const generateDisposable = vscode.commands.registerCommand("committor.generate", async (scm?: any) => {
 		try {
 			const config = vscode.workspace.getConfiguration("committor");
-			let defaultProvider = config.get<string>("defaultProvider");
+			let activeProvider = config.get<string>("activeProvider");
 			let apiProvider;
 			let selectedModel;
 			let apiKey;
 
-			if (defaultProvider) {
-				const providerLabel = defaultProvider === "openai" ? "OpenAI" : (defaultProvider === "openrouter" ? "OpenRouter" : (defaultProvider === "groq" ? "Groq" : "Gemini"));
-				apiProvider = { label: providerLabel, value: defaultProvider };
+			// Auto-detection logic if no active provider is set
+			if (!activeProvider) {
+				const availableProviders: string[] = [];
+				const providersToCheck = ["openai", "gemini", "openrouter", "groq"];
 
-				const modelValue = config.get<string>(`${defaultProvider}Model`);
-				selectedModel = { label: modelValue || "Default", value: modelValue || "" };
-
-				apiKey = config.get<string>(`${defaultProvider}Key`);
-
-				if (!apiKey || !modelValue) {
-					apiProvider = undefined;
+				for (const p of providersToCheck) {
+					if (config.get<string>(`${p}Key`)) {
+						availableProviders.push(p);
+					}
 				}
+
+				if (availableProviders.length > 0) {
+					activeProvider = availableProviders[0];
+					await config.update("activeProvider", activeProvider, vscode.ConfigurationTarget.Global);
+					vscode.window.showInformationMessage(`Auto-selected ${activeProvider.charAt(0).toUpperCase() + activeProvider.slice(1)} as active provider.`);
+				}
+			}
+
+			if (activeProvider) {
+				const providerLabel = activeProvider === "openai" ? "OpenAI" : (activeProvider === "openrouter" ? "OpenRouter" : (activeProvider === "groq" ? "Groq" : "Gemini"));
+				apiProvider = { label: providerLabel, value: activeProvider };
+
+				const modelValue = config.get<string>(`${activeProvider}Model`);
+				apiKey = config.get<string>(`${activeProvider}Key`);
+
+				if (!apiKey) {
+					throw new Error(`${providerLabel} is selected as the active provider but its API Key is missing. Please configure it in settings.`);
+				}
+				if (!modelValue) {
+					throw new Error(`${providerLabel} is selected as the active provider but no model is selected. Please configure it in settings.`);
+				}
+
+				selectedModel = { label: modelValue, value: modelValue };
 			}
 
 			if (!apiProvider) {
 				const openSettings = "Open Settings";
 				const selection = await vscode.window.showErrorMessage(
-					"API Key or Provider not configured. Please set them in settings or select a provider now.",
+					"No AI provider is configured. Please set an API Key in settings or select a provider to configure.",
 					"Select Provider",
 					openSettings
 				);
@@ -52,8 +73,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 					apiKey = result.key;
 
-					if (result.saved && !defaultProvider) {
-						await config.update("defaultProvider", apiProvider.value, vscode.ConfigurationTarget.Global);
+					if (result.saved) {
+						await config.update("activeProvider", apiProvider.value, vscode.ConfigurationTarget.Global);
 					}
 				} else {
 					return;
@@ -106,7 +127,27 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	context.subscriptions.push(disposable);
+	const switchDisposable = vscode.commands.registerCommand("committor.switchProvider", async () => {
+		const provider = await selectProvider();
+		if (provider) {
+			const config = vscode.workspace.getConfiguration("committor");
+			await config.update("activeProvider", provider.value, vscode.ConfigurationTarget.Global);
+
+			const model = await selectModel(provider);
+			if (model) {
+				await config.update(`${provider.value}Model`, model.value, vscode.ConfigurationTarget.Global);
+			}
+
+			const apiKey = config.get<string>(`${provider.value}Key`);
+			if (!apiKey) {
+				await ensureApiKey(provider, model?.value);
+			}
+
+			vscode.window.showInformationMessage(`Active provider switched to ${provider.label}`);
+		}
+	});
+
+	context.subscriptions.push(generateDisposable, switchDisposable);
 }
 
 export function deactivate() { }

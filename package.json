@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "icon": "icon.png",
   "repository": {
     "type": "git",
@@ -50,6 +50,10 @@
         "command": "committor.generate",
         "title": "Committor: Generate Commit Message",
         "icon": "resources/sparkle.svg"
+      },
+      {
+        "command": "committor.switchProvider",
+        "title": "Committor: Switch AI Provider"
       }
     ],
     "menus": {
@@ -71,15 +75,15 @@
     "configuration": {
       "title": "Committor Settings",
       "properties": {
-        "committor.defaultProvider": {
+        "committor.activeProvider": {
           "type": "string",
-          "description": "Default AI Provider to use without prompting",
+          "description": "The AI Provider currently in use (radio button). If not set, it will be auto-detected or prompted.",
           "default": "",
           "enum": [
             "",
             "openai",
-            "openrouter",
             "gemini",
+            "openrouter",
             "groq"
           ]
         },

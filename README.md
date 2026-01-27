@@ -2,6 +2,7 @@
   <img src="icon.png" width="128" alt="Committor Logo">
 </p>
 
+
 # Committor: AI that writes your Git commits
 
 [![Marketplace](https://img.shields.io/visual-studio-marketplace/v/ManojBelbase.committor?label=Marketplace&style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ManojBelbase.committor)
@@ -52,7 +53,9 @@ Follow these simple steps to set up and start using **Committor**.
 
 ### 3. (Optional) Fine-Tuning Settings
 Access settings via `Ctrl+,` and search for **"Committor"**:
-- **Default Provider**: Set a provider to skip the selection prompt.
+- **Active Provider**: Select which AI to use (acts like a radio button).
+- **Auto-Detection**: If no provider is selected, Committor automatically finds a configured API key for you.
+- **Switch Provider**: Use the command palette (`Ctrl+Shift+P`) and type **"Committor: Switch AI Provider"** to quickly swap between AIs.
 - **Copy to Clipboard**: Enabled by default for easy pasting elsewhere.
 
 ---
@@ -114,7 +117,7 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| `committor.defaultProvider` | Skip selection by setting a default AI. | `""` |
+| `committor.activeProvider` | The AI currently in use (radio button). Auto-detected if empty. | `""` |
 | `committor.openaiModel` | Default model for OpenAI. | `"gpt-4o"` |
 | `committor.groqModel` | Default model for Groq. | `"openai/gpt-oss-120b"` |
 | `committor.openrouterModel` | Default model for OpenRouter. | `"meta-llama/llama-3.3-70b-instruct:free"` |
@@ -208,5 +211,6 @@ We welcome contributions and your feedback!
 - **Repository**: [https://github.com/ManojBelbase/committor](https://github.com/ManojBelbase/committor)
 
 ---
+
 
 **Enjoying Committor?** Please rate us ⭐⭐⭐⭐⭐ in the marketplace!
