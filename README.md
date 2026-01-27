@@ -53,7 +53,7 @@ Follow these simple steps to set up and start using **Committor**.
 
 ### 3. (Optional) Fine-Tuning Settings
 Access settings via `Ctrl+,` and search for **"Committor"**:
-- **Active Provider**: Select which AI to use (acts like a radio button).
+- **Active Provider**: Select which AI to use.
 - **Auto-Detection**: If no provider is selected, Committor automatically finds a configured API key for you.
 - **Switch Provider**: Use the command palette (`Ctrl+Shift+P`) and type **"Committor: Switch AI Provider"** to quickly swap between AIs.
 - **Copy to Clipboard**: Enabled by default for easy pasting elsewhere.
@@ -117,7 +117,7 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| `committor.activeProvider` | The AI currently in use (radio button). Auto-detected if empty. | `""` |
+| `committor.activeProvider` | The AI currently in use. Auto-detected if empty. | `""` |
 | `committor.openaiModel` | Default model for OpenAI. | `"gpt-4o"` |
 | `committor.groqModel` | Default model for Groq. | `"openai/gpt-oss-120b"` |
 | `committor.openrouterModel` | Default model for OpenRouter. | `"meta-llama/llama-3.3-70b-instruct:free"` |
@@ -209,6 +209,12 @@ We welcome contributions and your feedback!
 - **Request a Model**: If there’s a specific model you’d like to see supported, please [open an issue](https://github.com/ManojBelbase/committor/issues) on GitHub.
 - **Contribute**: Feel free to submit pull requests for new features, bug fixes, or improved prompts.
 - **Repository**: [https://github.com/ManojBelbase/committor](https://github.com/ManojBelbase/committor)
+
+## Contact & Support
+
+Have a suggestion, found a bug, or just want to say hi?
+
+[**📧 Send Feedback / Report Issue**](mailto:manojbelbase56@gmail.com?subject=Committor%20Extension%20Feedback&body=Hi%20Manoj%2C%0A%0AI%20have%20some%20feedback%20for%20the%20Committor%20extension%3A%0A%0A-%20Type%3A%20%5BFeature%20Request%20%2F%20Bug%20Report%20%2F%20Question%5D%0A-%20Details%3A%20%0A%0AThanks!)
 
 ---
 

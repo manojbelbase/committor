@@ -77,7 +77,7 @@
       "properties": {
         "committor.activeProvider": {
           "type": "string",
-          "description": "The AI Provider currently in use (radio button). If not set, it will be auto-detected or prompted.",
+          "description": "The AI Provider currently in use. If not set, it will be auto-detected or prompted.",
           "default": "",
           "enum": [
             "",

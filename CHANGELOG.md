@@ -7,7 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.1.0] - 2026-01-27
 
 ### Added
-- **Active Provider Selection**: Refactored `defaultProvider` to `activeProvider` for a clear "radio button" style selection of the active AI.
+- **Active Provider Selection**: Refactored `defaultProvider` to `activeProvider` for a clear style selection of the active AI.
 - **Auto-Detection Logic**: Automatically selects the active provider if none is set, based on configured API keys.
 - **Switch AI Provider Command**: New command to quickly swap between AI providers and models from the command palette.
 - **Robust Error Handling**: Added specific error messages for missing API keys or unselected models when a provider is active.
