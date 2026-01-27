@@ -3,8 +3,10 @@ import { generateCommit } from "./commit/commitGenerator";
 import { selectProvider, selectModel } from "./ui/selector";
 import { ensureApiKey } from "./config/configuration";
 import { getReadableError } from "./utils/errorHandler";
+import { loadEnv } from "./utils/envLoader";
 
 export function activate(context: vscode.ExtensionContext) {
+	loadEnv();
 	const disposable = vscode.commands.registerCommand("committor.generate", async () => {
 		try {
 			const config = vscode.workspace.getConfiguration("committor");

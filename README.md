@@ -16,8 +16,8 @@
 
 ## Features
 
-- **Multi-Provider Support**: Switch between OpenAI, Google Gemini, or OpenRouter with ease.
-- **Free-to-Use Models**: Optimized for free models like Llama 3.3 70B and Gemini 2.0 Flash via OpenRouter.
+- **Multi-Provider Support**: Switch between OpenAI, Google Gemini, Groq, or OpenRouter with ease.
+- **State-of-the-Art Models**: Optimized for performance with models like GPT-4o, Gemini 2.0, and Groq's super-fast Llama 3 models.
 - **Auto-Population**: Automatically fills the Git Source Control input box for you.
 - **Privacy First**: Your API keys never leave your machine; they are stored locally in VS Code's secure configuration.
 - **Conventional Commits**: Strictly adheres to the Conventional Commits standard (`feat:`, `fix:`, `chore:`, etc.).
@@ -37,6 +37,7 @@ Using **Committor** is easy. Follow these steps to get started:
 Before generating your first commit, you need to provide an API key for your chosen AI provider.
 
 1. **Get an API Key**:
+   - **Groq (Super Fast)**: Get an API key from [Groq Console](https://console.groq.com/keys).
    - **OpenRouter (Recommended)**: Go to [openrouter.ai](https://openrouter.ai/keys) to get a free key for models like DeepSeek R1.
    - **Google Gemini**: Get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
    - **OpenAI**: Get a key from [OpenAI Dashboard](https://platform.openai.com/api-keys).
@@ -113,7 +114,8 @@ Settings are managed via VS Code's standard settings interface (`Ctrl+,`).
 | Setting | Description | Default |
 |---------|-------------|---------|
 | `committor.defaultProvider` | Skip selection by setting a default AI. | `""` |
-| `committor.openaiModel` | Default model for OpenAI. | `"gpt-4"` |
+| `committor.openaiModel` | Default model for OpenAI. | `"gpt-4o"` |
+| `committor.groqModel` | Default model for Groq. | `"openai/gpt-oss-120b"` |
 | `committor.openrouterModel` | Default model for OpenRouter. | `"meta-llama/llama-3.3-70b-instruct:free"` |
 | `committor.geminiModel` | Default model for Gemini. | `"gemini-1.5-flash"` |
 | `committor.copyToClipboard` | Automatically copy generated message to clipboard. | `true` |

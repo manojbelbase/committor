@@ -4,7 +4,17 @@ All notable changes to the "committor" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.0.6] - 2026-01-26
+## [1.0.8] - 2026-01-27
+
+### Added
+- **Groq SDK Migration**: Switched to the official `openai` SDK for Groq integration.
+- **New Groq Models**: Added support for `openai/gpt-oss-120b`, `llama-3.3-70b-versatile`, `qwen/qwen3-32b`, and more.
+- **Groq Responses API**: Implementation now uses the latest `/responses` endpoint for improved performance.
+
+### Changed
+- Updated project version to 1.0.8.
+
+## [1.0.7] - 2026-01-27
 
 ### Changed
 - Aligned `package.json` model enums and `README.md` configuration details with current code implementation.

@@ -2,12 +2,14 @@ import { getStagedChanges } from "../utils/gitUtils";
 import { generateCommitOpenAI } from "../llms/openAI";
 import { generateCommitOpenRouter } from "../llms/openRouter";
 import { generateCommitGemini } from "../llms/gemini";
+import { generateCommitGroq } from "../llms/groq";
 import { LLMGenerator } from "../types";
 import * as vscode from "vscode";
 
 const PROVIDER_MAP: Record<string, LLMGenerator> = {
-    openai: generateCommitOpenAI,
     openrouter: generateCommitOpenRouter,
+    groq: generateCommitGroq,
+    openai: generateCommitOpenAI,
     gemini: generateCommitGemini,
 };
 

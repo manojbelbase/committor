@@ -3,7 +3,7 @@
   "displayName": "Committor: AI that writes your Git commits",
   "publisher": "manojbelbase",
   "description": "The ultimate AI Git commit message generator. Boost productivity with automated, meaningful, and conventional commits using GPT-4o, Gemini 2.0, DeepSeek R1, and more.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "icon": "icon.png",
   "repository": {
     "type": "git",
@@ -62,7 +62,8 @@
             "",
             "openai",
             "openrouter",
-            "gemini"
+            "gemini",
+            "groq"
           ]
         },
         "committor.openaiKey": {
@@ -119,6 +120,25 @@
             "gemini-2.0-pro-exp-02-05"
           ]
         },
+        "committor.groqKey": {
+          "type": "string",
+          "description": "Your Groq API Key",
+          "default": ""
+        },
+        "committor.groqModel": {
+          "type": "string",
+          "description": "Default Groq model",
+          "default": "openai/gpt-oss-120b",
+          "enum": [
+            "openai/gpt-oss-120b",
+            "llama-3.3-70b-specdec",
+            "llama-3.1-8b-instant",
+            "qwen/qwen3-32b",
+            "meta-llama/llama-4-scout-17b-16e-instruct",
+            "moonshotai/kimi-k2-instruct-0905",
+            "llama-3.3-70b-versatile"
+          ]
+        },
         "committor.copyToClipboard": {
           "type": "boolean",
           "description": "Automatically copy the generated commit message to the clipboard",
@@ -140,6 +160,7 @@
   },
   "dependencies": {
     "axios": "^1.13.2",
+    "openai": "^4.82.0",
     "simple-git": "^3.30.0"
   }
 }

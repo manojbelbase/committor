@@ -4,21 +4,21 @@ import { AIProvider, AIModel } from "../types";
 const PROVIDERS: AIProvider[] = [
     { label: "OpenAI", value: "openai" },
     { label: "OpenRouter", value: "openrouter" },
-    { label: "Gemini", value: "gemini" }
+    { label: "Gemini", value: "gemini" },
+    { label: "Groq", value: "groq" }
 ];
 
 const MODEL_OPTIONS: { [key: string]: AIModel[] } = {
-    openai: [
-        { label: "GPT-4o", value: "gpt-4o" },
-        { label: "GPT-4o mini", value: "gpt-4o-mini" },
-        { label: "GPT-4", value: "gpt-4" },
-        { label: "GPT-4 Turbo", value: "gpt-4-turbo" },
-        { label: "o1 Preview", value: "o1-preview" },
-        { label: "o1 Mini", value: "o1-mini" },
-        { label: "o1", value: "o1" }
+
+    groq: [
+        { label: "OpenAI GPT-4O", value: "openai/gpt-oss-120b" },
+        { label: "Llama 3.1 8B (Instant)", value: "llama-3.1-8b-instant" },
+        { label: "Qwen 32B (Fast/Free)", value: "qwen/qwen3-32b" },
+        { label: "Meta Llama 4 Scout 17B (Free)", value: "meta-llama/llama-4-scout-17b-16e-instruct" },
+        { label: "Moonshot AI Kimi K2 (Free)", value: "moonshotai/kimi-k2-instruct-0905" },
+        { label: "Llama 3.3 70B (Versatile)", value: "llama-3.3-70b-versatile" }
     ],
     openrouter: [
-        // dont change value only label
         { label: "Llama 3.3 70B (Fast/Free)", value: "meta-llama/llama-3.3-70b-instruct:free" },
         { label: "GLM 4.5 Air (Free)", value: "z-ai/glm-4.5-air:free" },
         { label: "Google Gemma 3 27B (Free)", value: "google/gemma-3-27b-it:free" },
@@ -33,7 +33,17 @@ const MODEL_OPTIONS: { [key: string]: AIModel[] } = {
         { label: "Gemini 2.0 Flash", value: "gemini-2.0-flash" },
         { label: "Gemini 2.0 Flash Lite", value: "gemini-2.0-flash-lite" },
         { label: "Gemini 2.0 Pro Experimental", value: "gemini-2.0-pro-exp-02-05" }
-    ]
+    ],
+    openai: [
+        { label: "GPT-4o", value: "gpt-4o" },
+        { label: "GPT-4o mini", value: "gpt-4o-mini" },
+        { label: "GPT-4", value: "gpt-4" },
+        { label: "GPT-4 Turbo", value: "gpt-4-turbo" },
+        { label: "o1 Preview", value: "o1-preview" },
+        { label: "o1 Mini", value: "o1-mini" },
+        { label: "o1", value: "o1" }
+    ],
+
 };
 
 export async function selectProvider(): Promise<AIProvider | undefined> {
