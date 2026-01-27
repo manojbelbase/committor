@@ -4,6 +4,16 @@ All notable changes to the "committor" extension will be documented in this file
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
  
+## [1.1.1] - 2026-01-27
+
+### Added
+- **Contact & Support Channel**: Added a direct email feedback link mechanism in README for streamlined bug reporting and feature requests.
+- Update docs to remove radio button terminology and add contact section.
+
+
+### Changed
+- Updated project version to 1.1.1.
+
 ## [1.1.0] - 2026-01-27
 
 ### Added
