@@ -4,6 +4,7 @@ import { selectProvider, selectModel } from "./ui/selector";
 import { ensureApiKey } from "./config/configuration";
 import { getReadableError } from "./utils/errorHandler";
 import { loadEnv } from "./utils/envLoader";
+import { validateProviderConfig } from "./utils/validator";
 
 export function activate(context: vscode.ExtensionContext) {
 	loadEnv();
@@ -15,7 +16,6 @@ export function activate(context: vscode.ExtensionContext) {
 			let selectedModel;
 			let apiKey;
 
-			// Auto-detection logic if no active provider is set
 			if (!activeProvider) {
 				const availableProviders: string[] = [];
 				const providersToCheck = ["openai", "gemini", "openrouter", "groq"];
@@ -40,14 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
 				const modelValue = config.get<string>(`${activeProvider}Model`);
 				apiKey = config.get<string>(`${activeProvider}Key`);
 
-				if (!apiKey) {
-					throw new Error(`${providerLabel} is selected as the active provider but its API Key is missing. Please configure it in settings.`);
-				}
-				if (!modelValue) {
-					throw new Error(`${providerLabel} is selected as the active provider but no model is selected. Please configure it in settings.`);
-				}
+				validateProviderConfig(apiKey, modelValue, providerLabel);
 
-				selectedModel = { label: modelValue, value: modelValue };
+				selectedModel = { label: modelValue!, value: modelValue! };
 			}
 
 			if (!apiProvider) {
