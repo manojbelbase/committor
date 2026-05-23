@@ -6,7 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [1.1.2] - 2026-05-23
 
-### Changed
+### Added
+
+update commit message format
 
 ## [1.1.1] - 2026-01-27
 
